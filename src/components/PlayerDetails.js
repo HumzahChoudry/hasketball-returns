@@ -1,7 +1,8 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
+import {connect} from 'react-redux'
 
-const PlayerDetails = ({ selectedPlayer }) => {
+const PlayerDetails = ({ selectedPlayer, unSelectPlayer }) => {
   return (
     <Card
       className='player-details'>
@@ -9,7 +10,7 @@ const PlayerDetails = ({ selectedPlayer }) => {
       <Card.Header>
         {selectedPlayer.name}
       </Card.Header>
-      <Card.Content className="detail-text">
+      <Card.Content className="detail-text" onClick={unSelectPlayer}>
         <Card.Meta>Number: {selectedPlayer.number}</Card.Meta>
         <Card.Meta>Shoe: {selectedPlayer.shoe}</Card.Meta>
         <Card.Meta>Points: {selectedPlayer.points}</Card.Meta>
@@ -23,7 +24,14 @@ const PlayerDetails = ({ selectedPlayer }) => {
   )
 }
 
-export default PlayerDetails
+function mapDispatchToProps(dispatch){
+  return {
+    unSelectPlayer: () => dispatch({type: "UNSELECT_PLAYER"}),
+    
+  }
+}
+
+export default connect(null, mapDispatchToProps)(PlayerDetails)
 
 {/* <div>
   <img src={selectedPlayer.image_url}></img>
