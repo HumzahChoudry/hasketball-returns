@@ -1,11 +1,22 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-const Player = ({ player, selectPlayer }) => {
+const Player = (props) => {
   return (
-    <div onClick={() => selectPlayer(player)}>
-      <p>{player.name}</p>
+    <div onClick={() => props.cookie(props.player)}>
+      <p>{props.player.name}</p>
     </div>
   )
 }
 
-export default Player
+function mapDispatchToProps(dispatch) {
+  console.log('dispatch', dispatch)
+  return {
+    cookie: (something) => dispatch({ //something is really a player
+      type: "CHOOSE_PLAYER",
+      payload: something
+    })
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Player)

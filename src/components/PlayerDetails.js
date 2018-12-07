@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
+import {connect} from 'react-redux'
 
 const PlayerDetails = ({ selectedPlayer }) => {
   return (
@@ -23,7 +24,13 @@ const PlayerDetails = ({ selectedPlayer }) => {
   )
 }
 
-export default PlayerDetails
+function mapStateToProps(state) {
+  return {
+    selectedPlayer: state.selectedPlayer
+  }
+}
+
+export default connect((state) => ( {selectedPlayer: state.selectedPlayer}) )(PlayerDetails)
 
 {/* <div>
   <img src={selectedPlayer.image_url}></img>
